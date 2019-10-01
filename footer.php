@@ -4,3 +4,4 @@
     <p class="navbar-text ">&copy; 2019 by Crud. All rights reserved.</p>
   </div>
 </nav>
+jguigujy
