@@ -1,13 +1,28 @@
 <?php
 require_once("db.php");
-$sql = "UPDATE emp1 set First_name ='" . $_POST["First_name"] . "',Last_name ='" . $_POST["Last_name"] . "', gender ='" . $_POST["gender"] . "', dob='" . $_POST["dob"] . "',hiredate='" . $_POST["joindate"]  ."' WHERE emp_id='" . $_POST["emp_id"] . "'" or die("error");
-$sql2 = "UPDATE Salary set salary ='" . $_POST["salary"] . "'  WHERE emp_no='" . $_POST["emp_no"] . "'" or die("error");
-	mysqli_query($conn,$sql);
-$message = "Employee Details Successfully Updated.";
-$select_query = "SELECT emp1.*, Dept_emp.dept_id ,Salary.salary ,department.dept_name FROM emp1 INNER JOIN Salary ON emp1.emp_id = Salary.emp_no INNER JOIN Dept_emp ON emp1.emp_id = Dept_emp.emp_id INNER JOIN department ON department.dept_id = Dept_emp.dept_id WHERE emp1.emp_id='" . $_GET["emp_id"] . "'";
+//echo "<pre>";print_r($sql3);
+//~ echo "<pre>";print_r($_POST);
+//~ var_dump($sql);die;
+$sql1 = "UPDATE emp1 set First_name ='" . $_POST["First_name"] . "',Last_name ='" . $_POST["Last_name"] . "', gender ='" . $_POST["gender"] . "', dob='" . $_POST["dob"] . "',hiredate='" . $_POST["joindate"]  ."' WHERE emp_id='" . $_POST["emp_id"] . "'" or die("error");
+$sql2 = "UPDATE Salary set salary ='" . $_POST["salary"] . "'  WHERE emp_no='" . $_POST["emp_id"] . "'" or die("error");
+$sql3 = "UPDATE Dept_emp set dept_id ='" . $_POST["departm"] . "'  WHERE dept_id='" . $_POST["emp_id"] . "'" or die("error");
+//echo $sql1."\n";
+//echo $sql2."\n";
+//echo $sql3."\n";
 
+mysqli_query($conn,$sql1);
+mysqli_query($conn,$sql2);
+mysqli_query($conn,$sql3);
+//~ $message = "Employee Details Successfully Updated.";
+
+$select_query = "SELECT emp1.*, Dept_emp.dept_id ,Salary.salary ,department.dept_name FROM emp1 
+INNER JOIN Salary ON emp1.emp_id = Salary.emp_no 
+INNER JOIN Dept_emp ON emp1.emp_id = Dept_emp.emp_id 
+INNER JOIN department ON department.dept_id = Dept_emp.dept_id WHERE emp1.emp_id='" . $_GET["emp_id"] . "'";
 $result = mysqli_query($conn,$select_query);
 $row = mysqli_fetch_array($result);
+
+$yes = mysqli_query($conn,"SELECT * FROM department dept_name");
 ?>
 <html>
 <head>
@@ -89,7 +104,22 @@ $row = mysqli_fetch_array($result);
           <label for="name">joining Date</label>
           <input value="<?php echo $row['hiredate']; ?>" type="text" name="joindate"  class="form-control">
         </div>
-      
+      <div class="form-group ">
+                       <label for="inputLName">Department</label>
+                      <select class="form-control" name="departm">
+                       <option>  Select Department  </option>
+
+<?php
+while($row = mysqli_fetch_array($yes)){ ?>
+<option value="<?php echo $row['dept_id'];?>"> <?php echo $row['dept_name'];?>
+
+</option>
+<?php }?>
+
+</select>
+           </div>
+           <br>
+           <br>
         <div class="form-group " >
 			 <div style="text-align:center">
           <button type="submit" class="btn btn-primary">Update person</button>
