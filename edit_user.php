@@ -2,7 +2,7 @@
 require_once("db.php");
 //echo "<pre>";print_r($sql3);
 //~ echo "<pre>";print_r($_POST);
-//~ var_dump($sql);die;
+//~ var_dump($sql3);die;
 $sql1 = "UPDATE emp1 set First_name ='" . $_POST["First_name"] . "',Last_name ='" . $_POST["Last_name"] . "', gender ='" . $_POST["gender"] . "', dob='" . $_POST["dob"] . "',hiredate='" . $_POST["joindate"]  ."' WHERE emp_id='" . $_POST["emp_id"] . "'" or die("error");
 $sql2 = "UPDATE Salary set salary ='" . $_POST["salary"] . "'  WHERE emp_no='" . $_POST["emp_id"] . "'" or die("error");
 $sql3 = "UPDATE Dept_emp set dept_id ='" . $_POST["departm"] . "'  WHERE dept_id='" . $_POST["emp_id"] . "'" or die("error");
@@ -31,10 +31,25 @@ $yes = mysqli_query($conn,"SELECT * FROM department dept_name");
 <meta name="viewport" content="width=device-width, initial-scale=1"> 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> 
  <link rel="stylesheet" href="assets/css/ilmudetil.css">
-
- 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script> 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+  $( function() {
+    $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+  } );
+  </script>
+  
+  <script>
+  $( function() {
+    $( "#datepicker1" ).datepicker({ dateFormat: 'yy-mm-dd' });
+  } );
+
+  
+  </script>
+
 </head> 
 <body> 
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -94,7 +109,7 @@ $yes = mysqli_query($conn,"SELECT * FROM department dept_name");
                    </div>
         <div class="form-group">
           <label for="name"> dob </label>
-          <input value="<?php echo $row['dob']; ?>" type="text" name="dob"  class="form-control">
+          <input value="<?php echo $row['dob']; ?>" type="text" name="dob"  class="form-control" id="datepicker">
         </div>
         <div class="form-group">
           <label for="name"> SAlary </label>
@@ -102,7 +117,7 @@ $yes = mysqli_query($conn,"SELECT * FROM department dept_name");
         </div>
         <div class="form-group">
           <label for="name">joining Date</label>
-          <input value="<?php echo $row['hiredate']; ?>" type="text" name="joindate"  class="form-control">
+          <input value="<?php echo $row['hiredate']; ?>" type="text" name="joindate"  class="form-control" id="datepicker1">
         </div>
       <div class="form-group ">
                        <label for="inputLName">Department</label>
