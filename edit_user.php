@@ -1,14 +1,16 @@
 <?php
 require_once("db.php");
+
 //echo "<pre>";print_r($sql3);
 //~ echo "<pre>";print_r($_POST);
 //~ var_dump($sql3);die;
 $sql1 = "UPDATE emp1 set First_name ='" . $_POST["First_name"] . "',Last_name ='" . $_POST["Last_name"] . "', gender ='" . $_POST["gender"] . "', dob='" . $_POST["dob"] . "',hiredate='" . $_POST["joindate"]  ."' WHERE emp_id='" . $_POST["emp_id"] . "'" or die("error");
 $sql2 = "UPDATE Salary set salary ='" . $_POST["salary"] . "'  WHERE emp_no='" . $_POST["emp_id"] . "'" or die("error");
-$sql3 = "UPDATE Dept_emp set dept_id ='" . $_POST["departm"] . "'  WHERE dept_id='" . $_POST["emp_id"] . "'" or die("error");
+$sql3 = "UPDATE Dept_emp set dept_id ='" . $_POST["departm"] . "'  WHERE emp_id='" . $_POST["emp_id"] . "'" or die("error");
+//~ UPDATE Dept_emp set dept_id =1 WHERE Dept_emp.emp_id=1
 //echo $sql1."\n";
 //echo $sql2."\n";
-//echo $sql3."\n";
+//~ echo $sql3."\n";
 
 mysqli_query($conn,$sql1);
 mysqli_query($conn,$sql2);
@@ -52,6 +54,7 @@ $yes = mysqli_query($conn,"SELECT * FROM department dept_name");
 
 </head> 
 <body> 
+
 <nav class="navbar navbar-default navbar-fixed-top">
  <div class="container">
   <div class="navbar-header">
